@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { AddComponent } from './pages/add/add.component';
 import { SearchComponent } from './pages/search/search.component';
@@ -10,8 +11,7 @@ import { ListComponent } from './pages/list/list.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { HeroeCardComponent } from './components/heroe-card/heroe-card.component';
-
-
+import { ImagePipe } from './pipes/image.pipe';
 
 @NgModule({
   declarations: [
@@ -20,10 +20,12 @@ import { HeroeCardComponent } from './components/heroe-card/heroe-card.component
     HeroeComponent,
     HomeComponent,
     ListComponent,
-    HeroeCardComponent
+    HeroeCardComponent,
+    ImagePipe
   ],
   imports: [
     CommonModule,
+    FormsModule,
     HeroesRoutingModule,
     MaterialModule
   ]
