@@ -17,8 +17,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 100px;
 }
 
+.flex-heroe{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.img-heroe-component{
+    width: 100%;
+    border-radius: 25px;
+}
+
+.heroe-title{
+    text-align: center;
+}
+
+.span-heroe{
+    font-weight: bolder;
+    margin-right: 3px;
+}
+/* MEDIA QUERIES */
 @media all and (min-width: 481px) and (max-width: 768px){
-    .flex-cards{
+    .flex-cards, .flex-heroe{
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -27,10 +47,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .flex-cards{
         grid-template-columns: repeat(3, 1fr);
     }
+    .flex-heroe{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .img-heroe-component{
+        width: 350px;
+        height: 500px;
+    }
 }
-
 @media all and (min-width: 1025px) {
     .flex-cards{
         grid-template-columns: repeat(4, 1fr);
+    }
+    .flex-heroe{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .img-heroe-component{
+        width: 350px;
+        height: 500px;
+        margin-top: 10px;
+        margin-left: 170px;
     }
 }
