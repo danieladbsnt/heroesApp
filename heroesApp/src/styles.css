@@ -36,11 +36,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: bolder;
     margin-right: 3px;
 }
+
+.add-component {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.add-div{
+    width: 100%;
+}
+
+.span-divider{
+    margin-right: 20px;
+}
+
+.remove-btn{
+    margin-left: 10px;
+}
 /* MEDIA QUERIES */
 @media all and (min-width: 481px) and (max-width: 768px){
     .flex-cards, .flex-heroe{
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 @media all and (min-width: 769px) and (max-width: 1024px) {
