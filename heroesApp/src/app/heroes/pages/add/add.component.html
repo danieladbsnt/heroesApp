@@ -1,1 +1,61 @@
-<p>add works!</p>
+<h1>Nuevo héroe <small>{{heroe.superhero}}</small></h1>
+
+<div class="add-component">
+    <div class="add-div">
+        <div>
+            <mat-form-field style="width: 220px;">
+            <mat-label>Super Héroe</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.superhero" required>
+        </mat-form-field>
+
+        <span class="span-divider"></span>
+
+        <mat-form-field style="width: 220px;">
+            <mat-label>Alter Ego</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.alter_ego" required>
+        </mat-form-field>
+        </div>
+
+        <mat-form-field style="width: 460px;">
+            <mat-label>Primera Aparición</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.first_appearance" required>
+        </mat-form-field>
+
+        <mat-form-field style="width: 460px;">
+            <mat-label>Personajes</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.characters" required>
+        </mat-form-field>
+
+        <mat-form-field style="width: 460px;">
+            <mat-label>Creador</mat-label>
+            <mat-select [(ngModel)]="heroe.publisher" required>
+                <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+                    {{publisher.desc}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 460px;">
+            <mat-label>Foto URL</mat-label>
+            <input matInput type="url" [(ngModel)]="heroe.alt_img" required>
+        </mat-form-field>
+        <br>
+
+        <div>
+            <button (click)="save()" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+            Guardar
+        </button>
+            <span class="spacer"></span>
+            <button (click)="deleteHero()" *ngIf="heroe.id" class="remove-btn" mat-raised-button color="warn">
+                <mat-icon>remove</mat-icon>
+                Borrar
+            </button>
+        </div>
+       
+
+    </div>
+    <div class="add-div">
+        <img [src]="heroe | image" alt="">
+    </div>
+</div>
