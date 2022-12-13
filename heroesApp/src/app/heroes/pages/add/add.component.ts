@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { ConfirmeComponent } from '../../components/confirme/confirme.component';
 
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
@@ -42,7 +45,9 @@ export class AddComponent implements OnInit {
   
   constructor(private heroesService: HeroesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -61,20 +66,41 @@ export class AddComponent implements OnInit {
     } 
     
     if(this.heroe.id) {
+      //Actualizar
       this.heroesService.updateHeroe(this.heroe)
-      .subscribe(heroe => console.log('Actualizando', heroe))
+      .subscribe(heroe => this.showSnackBar('Registro actualizado'))
     } else {
+      //Crear
       this.heroesService.addHeroe(this.heroe)
       .subscribe(heroe => {
-        this.router.navigate(['/heroes/edit', heroe.id])
+        this.router.navigate(['/heroes/edit', heroe.id]);
+        this.showSnackBar('Registro creado')
     })
     }
   } 
 
   deleteHero() {
-    this.heroesService.deleteHeroe(this.heroe.id!)
-    .subscribe(resp => {
-      this.router.navigate(['/heroes']);
-    })
+   const dialog = this.dialog.open(ConfirmeComponent, {
+    width: '350px',
+    data: this.heroe
+   });
+   
+   dialog.afterClosed().subscribe(
+    (result) => {
+      if (result) {
+        this.heroesService.deleteHeroe(this.heroe.id!)
+          .subscribe(resp => {
+            this.router.navigate(['/heroes']);
+          });
+      }
+    }
+   )
   }
+
+  showSnackBar(msg: string) {
+    this.snackBar.open(msg, 'Ok!', {
+      duration: 2500
+    });
+  }
+
 }
